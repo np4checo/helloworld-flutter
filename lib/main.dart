@@ -1,23 +1,56 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MeuApp());
-
-class MeuApp extends StatefulWidget {
-  final String nome = 'Natan';
-  @override
-  State<MeuApp> createState() => _MeuAppState();
+main() {
+  runApp(PerguntaApp());
 }
 
-class _MeuAppState extends State<MeuApp> {
-  int salario = 1250;
+class PerguntaAppState extends State<PerguntaApp> {
+  void responder() {
+    setState(() {
+        perguntaSelecionada++;
+      };
+
+    print(perguntaSelecionada);
+  }
+
+  var perguntaSelecionada = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'O salário é certo de ${widget.nome} é de ${salario}',
-        style: TextStyle(fontSize: 30),
-        textDirection: TextDirection.ltr,
+    final perguntas = [
+      'Qual seu animal favorito?',
+      'Qual sua cor favorita?',
+      'Qual sua comida favorita?',
+    ];
+    return MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(
+        title: const Center(child: Text("Questionário")),
       ),
-    );
+      body: Column(
+        children: [
+          Text(perguntas[perguntaSelecionada],
+              style: const TextStyle(fontSize: 40)),
+          ElevatedButton(
+            onPressed: responder,
+            child: const Text('Resposta 1'),
+          ),
+          ElevatedButton(
+            onPressed: responder,
+            child: const Text('Resposta 2'),
+          ),
+          ElevatedButton(
+            onPressed: responder,
+            child: const Text('Resposta 3'),
+          ),
+        ],
+      ),
+    ));
+  }
+}
+
+class PerguntaApp extends StatefulWidget {
+  PerguntaAppState createState() {
+    return PerguntaAppState();
   }
 }
