@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './resposta.dart';
 
 main() {
-  runApp(PerguntaApp());
+  runApp(const PerguntaApp());
 }
 
 class _PerguntaAppState extends State<PerguntaApp> {
@@ -10,7 +11,6 @@ class _PerguntaAppState extends State<PerguntaApp> {
     setState(() {
       _perguntaSelecionada++;
     });
-    print(_perguntaSelecionada);
   }
 
   var _perguntaSelecionada = 0;
@@ -30,18 +30,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
       body: Column(
         children: [
           Questao(perguntas[_perguntaSelecionada]),
-          ElevatedButton(
-            onPressed: _responder,
-            child: const Text('Resposta 1'),
-          ),
-          ElevatedButton(
-            onPressed: _responder,
-            child: const Text('Resposta 2'),
-          ),
-          ElevatedButton(
-            onPressed: _responder,
-            child: const Text('Resposta 3'),
-          ),
+          Resposta('Resposta 1', _responder),
+          Resposta('Resposta 2', _responder),
+          Resposta('Resposta 3', _responder)
         ],
       ),
     ));
@@ -49,6 +40,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
 }
 
 class PerguntaApp extends StatefulWidget {
+  const PerguntaApp({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
   _PerguntaAppState createState() {
     return _PerguntaAppState();
   }
